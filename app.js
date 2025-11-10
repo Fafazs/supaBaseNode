@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const supabase = 
-    supabaseClient.createClient('https://minhaurl', 
-        'minhaAPIKey')
+    supabaseClient.createClient('https://bwrvtmpjkbpafxoidocj.supabase.co', 
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3cnZ0bXBqa2JwYWZ4b2lkb2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MDAxMDksImV4cCI6MjA3ODM3NjEwOX0.bjNE1QENUe8KIK-prk9Yo9MB2Eg7YAx5vZ72ujoRm3k')
 
 
 app.get('/products', async (req, res) => {
@@ -106,9 +106,9 @@ app.get('/', (req, res) => {
     res.send("Hello I am working my friend Supabase <3");
 });
 
-app.get('*', (req, res) => {
-    res.send("Hello again I am working my friend to the moon and behind <3");
-});
+//app.get('*', (req, res) => {
+//    res.send("Hello again I am working my friend to the moon and behind <3");
+//});
 
 app.listen(3000, () => {
     console.log(`> Ready on http://localhost:3000`);
