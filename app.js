@@ -66,8 +66,9 @@ app.post('/products', async (req, res) => {
         });
 
     if (error) {
-        return res.status(400).send(error);
-    }
+    console.log("SUPABASE INSERT ERROR:", error);
+    return res.status(400).send(error);
+}
 
     console.log("retorno " + req.body.name);
     console.log("retorno " + req.body.description);
@@ -87,9 +88,10 @@ app.put('/products/:id', async (req, res) => {
         })
         .eq('id', req.params.id);
 
-    if (error) {
-        return res.status(400).send(error);
-    }
+   if (error) {
+    console.log("SUPABASE INSERT ERROR:", error);
+    return res.status(400).send(error);
+}
 
     return res.send("updated!!");
 });
@@ -101,9 +103,10 @@ app.delete('/products/:id', async (req, res) => {
         .delete()
         .eq('id', req.params.id);
 
-    if (error) {
-        return res.status(400).send(error);
-    }
+   if (error) {
+    console.log("SUPABASE INSERT ERROR:", error);
+    return res.status(400).send(error);
+}
 
     return res.send("deleted!!");
 });
@@ -120,3 +123,4 @@ app.listen(3000, () => {
     console.log(`> Ready on http://localhost:3000`);
 
 });
+
