@@ -36,23 +36,23 @@ const supabase =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3cnZ0bXBqa2JwYWZ4b2lkb2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MDAxMDksImV4cCI6MjA3ODM3NjEwOX0.bjNE1QENUe8KIK-prk9Yo9MB2Eg7YAx5vZ72ujoRm3k')
 
 
+// GET all products
 app.get('/products', async (req, res) => {
-    const {data, error} = await supabase
+    const { data, error } = await supabase
         .from('products')
-        .select()
-    res.send(data);
-    console.log(`lists all products${data}`);
+        .select('id, name, description, price'); // inclui id explicitamente
+    if (error) return res.status(400).send(error);
+    return res.send(data);
 });
 
+// GET product by ID
 app.get('/products/:id', async (req, res) => {
-    console.log("id = " + req.params.id);
-    const {data, error} = await supabase
+    const { data, error } = await supabase
         .from('products')
-        .select()
-        .eq('id', req.params.id)
-    res.send(data);
-
-    console.log("retorno "+ data);
+        .select('id, name, description, price')
+        .eq('id', req.params.id);
+    if (error) return res.status(400).send(error);
+    return res.send(data);
 });
 
 app.post('/products', async (req, res) => {
@@ -123,4 +123,5 @@ app.listen(3000, () => {
     console.log(`> Ready on http://localhost:3000`);
 
 });
+
 
