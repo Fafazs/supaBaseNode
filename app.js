@@ -56,50 +56,56 @@ app.get('/products/:id', async (req, res) => {
 });
 
 app.post('/products', async (req, res) => {
-    const {error} = await supabase
+
+    const { error } = await supabase
         .from('products')
         .insert({
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-        })
-    if (error) {
-        res.send(error);
-    }
-    res.send("created!!");
-    console.log("retorno "+ req.body.name);
-    console.log("retorno "+ req.body.description);
-    console.log("retorno "+ req.body.price);
+        });
 
+    if (error) {
+        return res.status(400).send(error);
+    }
+
+    console.log("retorno " + req.body.name);
+    console.log("retorno " + req.body.description);
+    console.log("retorno " + req.body.price);
+
+    return res.send("created!!");
 });
 
+
 app.put('/products/:id', async (req, res) => {
-    const {error} = await supabase
+    const { error } = await supabase
         .from('products')
         .update({
             name: req.body.name,
             description: req.body.description,
             price: req.body.price
         })
-        .eq('id', req.params.id)
+        .eq('id', req.params.id);
+
     if (error) {
-        res.send(error);
+        return res.status(400).send(error);
     }
-    res.send("updated!!");
+
+    return res.send("updated!!");
 });
 
+
 app.delete('/products/:id', async (req, res) => {
-    console.log("delete: " + req.params.id);
-    const {error} = await supabase
+    const { error } = await supabase
         .from('products')
         .delete()
-        .eq('id', req.params.id)
-    if (error) {
-        res.send(error);
-    }
-    res.send("deleted!!")
-    console.log("delete: " + req.params.id);
+        .eq('id', req.params.id);
 
+    if (error) {
+        return res.status(400).send(error);
+    }
+
+    return res.send("deleted!!");
 });
 
 app.get('/', (req, res) => {
@@ -112,4 +118,5 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => {
     console.log(`> Ready on http://localhost:3000`);
+
 });
